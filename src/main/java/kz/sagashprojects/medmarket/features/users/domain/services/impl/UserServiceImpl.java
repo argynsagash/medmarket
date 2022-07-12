@@ -5,17 +5,36 @@ import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.data.repo.UserRepository;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity userEntity = userRepository.findByUsername(username);
+        if (userEntity == null) throw new UsernameNotFoundException("User not found in the database");
+        Collection<SimpleGrantedAuthority> auth = new ArrayList<>();
+        userEntity.getRoles().forEach(role->{
+            auth.add(new SimpleGrantedAuthority(role.getName()));
+        });
+        //return user from spring with info taken from our userentity
+        return new User(userEntity.getUsername(),userEntity.getPassword(),auth);
+    }
 
     @Override
     public UserEntity saveUser(UserEntity userEntity) {
