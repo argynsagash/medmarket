@@ -13,8 +13,5 @@ public class MedmarketApplication {
 		SpringApplication.run(MedmarketApplication.class, args);
 	}
 
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+
 }

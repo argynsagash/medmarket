@@ -1,6 +1,5 @@
 package kz.sagashprojects.medmarket.features.users.domain.services.impl;
 
-import kz.sagashprojects.medmarket.features.roles.data.repo.RoleRepository;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.data.repo.UserRepository;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
@@ -22,7 +21,6 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
