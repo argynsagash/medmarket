@@ -1,12 +1,13 @@
 package kz.sagashprojects.medmarket.features.analyzers.data.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import kz.sagashprojects.medmarket.features.companies.data.entities.CompanyEntity;
+import kz.sagashprojects.medmarket.features.companies.domain.models.Company;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "analyzer")
@@ -19,5 +20,9 @@ public class AnalyzerEntity {
     private String model;
     @Column(unique = true)
     private String serialNumber;
-
+    @Column
+    private String brand;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyEntity companyEntity;
 }

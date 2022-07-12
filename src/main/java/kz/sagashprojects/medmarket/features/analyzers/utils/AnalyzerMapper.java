@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface AnalyzerMapper {
-    AnalyzerMapper INSTANCE = Mappers.getMapper(AnalyzerMapper.class);
+    AnalyzerMapper MAPPER = Mappers.getMapper(AnalyzerMapper.class);
 
     AnalyzerEntity toEntity(Analyzer model);
 

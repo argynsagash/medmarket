@@ -31,7 +31,7 @@ public class AnalyzerController {
         return analyzerService.getById(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
         analyzerService.delete(id);
     }

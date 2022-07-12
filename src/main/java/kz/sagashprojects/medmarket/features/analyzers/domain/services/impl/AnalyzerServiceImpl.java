@@ -1,10 +1,11 @@
-package kz.sagashprojects.medmarket.features.analyzers.data.services;
+package kz.sagashprojects.medmarket.features.analyzers.domain.services.impl;
 
 import kz.sagashprojects.medmarket.features.analyzers.data.entities.AnalyzerEntity;
 import kz.sagashprojects.medmarket.features.analyzers.data.repositories.AnalyzerRepository;
 import kz.sagashprojects.medmarket.features.analyzers.utils.AnalyzerMapper;
 import kz.sagashprojects.medmarket.features.analyzers.domain.models.Analyzer;
 import kz.sagashprojects.medmarket.features.analyzers.domain.services.AnalyzerService;
+import kz.sagashprojects.medmarket.features.companies.utils.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,30 +23,23 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 
     @Override
     public void create(Analyzer analyzer) {
-        AnalyzerEntity analyzerEntity = new AnalyzerEntity();
-        analyzerEntity.setModel(analyzer.getModel());
-        analyzerEntity.setSerialNumber(analyzer.getSerialNumber());
+        AnalyzerEntity analyzerEntity = AnalyzerMapper.MAPPER.toEntity(analyzer);
         analyzerRepository.save(analyzerEntity);
     }
 
     @Override
     public Analyzer getById(Long id) {
-        AnalyzerEntity analyzerEntity = analyzerRepository.findById(id).get();
-        Analyzer analyzer = new Analyzer();
-        analyzer.setModel(analyzerEntity.getModel());
-        analyzer.setSerialNumber(analyzerEntity.getSerialNumber());
-        return analyzer;
+        return AnalyzerMapper.MAPPER.fromEntity(analyzerRepository.findById(id).get());
     }
 
     @Override
     public List<Analyzer> getAll() {
-        return AnalyzerMapper.INSTANCE.fromEntityList(analyzerRepository.findAll());
+        return AnalyzerMapper.MAPPER.fromEntityList(analyzerRepository.findAll());
     }
 
     @Override
     public void delete(Long id) {
-        AnalyzerEntity analyzerEntity = analyzerRepository.findById(id).get();
-        analyzerRepository.delete(analyzerEntity);
+        analyzerRepository.deleteById(id);
 
     }
 }
