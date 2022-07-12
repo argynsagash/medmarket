@@ -3,9 +3,8 @@ package kz.sagashprojects.medmarket.features.analyzers.presentation.rest;
 import kz.sagashprojects.medmarket.features.analyzers.domain.models.Analyzer;
 import kz.sagashprojects.medmarket.features.analyzers.domain.services.AnalyzerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +19,21 @@ public class AnalyzerController {
     @GetMapping()
     public List<Analyzer> getAll() {
         return analyzerService.getAll();
+    }
+
+    @PostMapping
+    public void create(@RequestBody Analyzer analyzer) {
+        analyzerService.create(analyzer);
+    }
+
+    @GetMapping("/{id}")
+    public Analyzer getById(@PathVariable Long id) {
+        return analyzerService.getById(id);
+    }
+
+    @PostMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        analyzerService.delete(id);
     }
 
 }

@@ -17,7 +17,7 @@ public class AnalyzerEntity {
     private Long id;
     @Column
     private String model;
-    @Column
+    @Column(unique = true)
     private String serialNumber;
 
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Analyzer {
-    private Long id;
+//    private Long id;
     private String model;
     private String serialNumber;
 }

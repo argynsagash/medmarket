@@ -13,20 +13,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
-//@Transactional
+@RequiredArgsConstructor
+@Transactional
 public class AnalyzerServiceImpl implements AnalyzerService {
 
-    private final AnalyzerMapper mapper = AnalyzerMapper.INSTANCE;
-
     private final AnalyzerRepository analyzerRepository;
-
-    public AnalyzerServiceImpl(AnalyzerRepository analyzerRepository) {
-        this.analyzerRepository = analyzerRepository;
-    }
-
-
-
 
 
     @Override
@@ -48,7 +39,7 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 
     @Override
     public List<Analyzer> getAll() {
-        return mapper.fromEntityList(analyzerRepository.findAll());
+        return AnalyzerMapper.INSTANCE.fromEntityList(analyzerRepository.findAll());
     }
 
     @Override
