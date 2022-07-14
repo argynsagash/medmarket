@@ -1,5 +1,6 @@
 package kz.sagashprojects.medmarket.features.users.data.entities;
 
+import kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,5 +24,5 @@ public class UserEntity {
     @Column
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity> roles = new ArrayList<>();
+    private Collection<RoleEntity> roles = new ArrayList<>();
 }

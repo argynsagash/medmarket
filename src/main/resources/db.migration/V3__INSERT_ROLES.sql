@@ -1,0 +1,36 @@
+--
+--
+-- CREATE TABLE app_user
+-- (
+--     id       BIGINT NOT NULL,
+--     name     VARCHAR(255),
+--     username VARCHAR(255),
+--     password VARCHAR(255),
+--     CONSTRAINT pk_app_user PRIMARY KEY (id)
+-- );
+--
+-- CREATE TABLE app_user_roles
+-- (
+--     app_user_id BIGINT NOT NULL,
+--     roles_id    BIGINT NOT NULL
+-- );
+--
+--
+-- CREATE TABLE role
+-- (
+--     id   BIGINT NOT NULL,
+--     name VARCHAR(255),
+--     CONSTRAINT pk_role PRIMARY KEY (id)
+-- );
+--
+--
+-- ALTER TABLE app_user_roles
+--     ADD CONSTRAINT fk_appuserol_on_role_entity FOREIGN KEY (roles_id) REFERENCES role (id);
+--
+-- ALTER TABLE app_user_roles
+--     ADD CONSTRAINT fk_appuserol_on_user_entity FOREIGN KEY (app_user_id) REFERENCES app_user (id);
+--
+-- INSERT INTO role(name) values ('ROLE_ADMIN');
+-- INSERT INTO role(name) values ('ROLE_USER');
+
+-- INSERT INTO app_user(name,username,password) values ('Sagash Argyn','sagash','1234');
