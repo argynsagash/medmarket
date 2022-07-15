@@ -3,6 +3,7 @@ package kz.sagashprojects.medmarket.features.users.domain.services.impl;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.data.repo.UserRepository;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
+import kz.sagashprojects.medmarket.features.users.rest.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -37,8 +38,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserEntity saveUser(UserEntity userEntity) {
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+    public UserEntity saveUser(UserDto user) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(user.getUsername());
+        userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(userEntity);
     }
 

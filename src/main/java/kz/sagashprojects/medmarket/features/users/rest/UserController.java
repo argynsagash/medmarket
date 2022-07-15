@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
+import kz.sagashprojects.medmarket.features.users.rest.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,8 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser());
     }
 
-    @PostMapping("/user/save")
-    public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity user){
+    @PostMapping("/save")
+    public ResponseEntity<UserEntity> saveUser(@RequestBody UserDto user){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }

@@ -26,17 +26,12 @@ public class MedmarketApplication {
     }
 
     @Bean
-    CommandLineRunner run(UserService userService, RoleService roleService) {
+    CommandLineRunner run(RoleService roleService) {
         return args -> {
             roleService.saveRole(new RoleEntity(null, "ROLE_USER"));
             roleService.saveRole(new RoleEntity(null, "ROLE_ADMIN"));
 
-            userService.saveUser(new UserEntity(null, "Sagash Argyn", "sagash", " 1234", new ArrayList<>()));
-            userService.saveUser(new UserEntity(null, "Ibraim", "ibra", " 1234", new ArrayList<>()));
-
-            roleService.addRoleToUser("sagash", "ROLE_ADMIN");
-            roleService.addRoleToUser("ibra", "ROLE_USER");
-
         };
     }
+
 }
