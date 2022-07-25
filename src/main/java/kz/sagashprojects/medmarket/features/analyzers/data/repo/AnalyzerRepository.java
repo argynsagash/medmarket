@@ -1,4 +1,4 @@
-package kz.sagashprojects.medmarket.features.analyzers.data.repositories;
+package kz.sagashprojects.medmarket.features.analyzers.data.repo;
 
 import kz.sagashprojects.medmarket.features.analyzers.data.entities.AnalyzerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

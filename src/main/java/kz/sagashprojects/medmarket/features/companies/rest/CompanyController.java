@@ -1,6 +1,5 @@
-package kz.sagashprojects.medmarket.features.companies.presentation.rest;
+package kz.sagashprojects.medmarket.features.companies.rest;
 
-import kz.sagashprojects.medmarket.features.analyzers.domain.models.Analyzer;
 import kz.sagashprojects.medmarket.features.companies.domain.models.Company;
 import kz.sagashprojects.medmarket.features.companies.domain.services.CompanyService;
 import lombok.RequiredArgsConstructor;

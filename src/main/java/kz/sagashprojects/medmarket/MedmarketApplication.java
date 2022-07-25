@@ -1,5 +1,8 @@
 package kz.sagashprojects.medmarket;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity;
 import kz.sagashprojects.medmarket.features.roles.domain.services.RoleService;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
@@ -14,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
 
 @SpringBootApplication
+@SecurityScheme(name = "basicauth", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class MedmarketApplication {
 
     public static void main(String[] args) {

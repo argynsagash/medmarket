@@ -1,4 +1,4 @@
-package kz.sagashprojects.medmarket.features.companies.data.repositories;
+package kz.sagashprojects.medmarket.features.companies.data.repo;
 
 import kz.sagashprojects.medmarket.features.companies.data.entities.CompanyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,9 +1,7 @@
 package kz.sagashprojects.medmarket.features.companies.domain.services.impl;
 
-import kz.sagashprojects.medmarket.features.analyzers.data.entities.AnalyzerEntity;
-import kz.sagashprojects.medmarket.features.analyzers.utils.AnalyzerMapper;
 import kz.sagashprojects.medmarket.features.companies.data.entities.CompanyEntity;
-import kz.sagashprojects.medmarket.features.companies.data.repositories.CompanyRepository;
+import kz.sagashprojects.medmarket.features.companies.data.repo.CompanyRepository;
 import kz.sagashprojects.medmarket.features.companies.domain.models.Company;
 import kz.sagashprojects.medmarket.features.companies.domain.services.CompanyService;
 import kz.sagashprojects.medmarket.features.companies.utils.CompanyMapper;

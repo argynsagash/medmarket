@@ -1,9 +1,8 @@
-package kz.sagashprojects.medmarket.features.analyzers.presentation.rest;
+package kz.sagashprojects.medmarket.features.analyzers.rest;
 
 import kz.sagashprojects.medmarket.features.analyzers.domain.models.Analyzer;
 import kz.sagashprojects.medmarket.features.analyzers.domain.services.AnalyzerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

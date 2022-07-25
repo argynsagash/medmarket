@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
@@ -27,6 +28,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequiredArgsConstructor
 @RestController
+@SecurityRequirement(name = "basicauth")
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
@@ -36,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/register")
     public ResponseEntity<UserEntity> saveUser(@RequestBody UserDto user){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
