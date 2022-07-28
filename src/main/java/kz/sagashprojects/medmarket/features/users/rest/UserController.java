@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
@@ -30,6 +31,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @SecurityRequirement(name = "basicauth")
 @RequestMapping("/api/users")
+@Tag(name = "users", description = "The Users API")
 public class UserController {
     private final UserService userService;
 
@@ -43,7 +45,8 @@ public class UserController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
-    @GetMapping("/token/refresh")
+
+    @GetMapping("/refreshtoken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -70,7 +73,6 @@ public class UserController {
 
                 response.setHeader("error",exception.getMessage());
                 response.setStatus(FORBIDDEN.value());
-//                    response.sendError(FORBIDDEN.value());
                 Map<String,String> error = new HashMap<>();
                 error.put("error_message",exception.getMessage());
                 response.setContentType(APPLICATION_JSON_VALUE);

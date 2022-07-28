@@ -1,5 +1,6 @@
 package kz.sagashprojects.medmarket.features.analyzers.rest;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kz.sagashprojects.medmarket.features.analyzers.domain.models.Analyzer;
 import kz.sagashprojects.medmarket.features.analyzers.domain.services.AnalyzerService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/analyzers")
+@Tag(name = "analyzers", description = "The Analyzers API")
 public class AnalyzerController {
 
     private final AnalyzerService analyzerService;

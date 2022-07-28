@@ -1,5 +1,6 @@
 package kz.sagashprojects.medmarket.features.companies.rest;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kz.sagashprojects.medmarket.features.companies.domain.models.Company;
 import kz.sagashprojects.medmarket.features.companies.domain.services.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/companies")
+@Tag(name = "companies", description = "The Companies API")
 public class CompanyController {
 
     private final CompanyService companyService;

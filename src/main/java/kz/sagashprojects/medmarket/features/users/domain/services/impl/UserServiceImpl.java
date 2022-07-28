@@ -1,5 +1,7 @@
 package kz.sagashprojects.medmarket.features.users.domain.services.impl;
 
+import kz.sagashprojects.medmarket.features.roles.data.entities.RoleEntity;
+import kz.sagashprojects.medmarket.features.roles.data.repo.RoleRepository;
 import kz.sagashprojects.medmarket.features.users.data.entities.UserEntity;
 import kz.sagashprojects.medmarket.features.users.data.repo.UserRepository;
 import kz.sagashprojects.medmarket.features.users.domain.services.UserService;
@@ -23,6 +25,7 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -30,11 +33,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         UserEntity userEntity = userRepository.findByUsername(username);
         if (userEntity == null) throw new UsernameNotFoundException("User not found in the database");
         Collection<SimpleGrantedAuthority> auth = new ArrayList<>();
-        userEntity.getRoles().forEach(role->{
+        userEntity.getRoles().forEach(role -> {
             auth.add(new SimpleGrantedAuthority(role.getName()));
         });
         //return user from spring with info taken from our userentity
-        return new User(userEntity.getUsername(),userEntity.getPassword(),auth);
+        return new User(userEntity.getUsername(), userEntity.getPassword(), auth);
     }
 
     @Override
@@ -42,6 +45,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(user.getUsername());
         userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
+        RoleEntity roleEntity = roleRepository.findByName("ROLE_USER");
+        userEntity.getRoles().add(roleEntity);
         return userRepository.save(userEntity);
     }
 
@@ -54,4 +59,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<UserEntity> getUser() {
         return userRepository.findAll();
     }
+
+    @Override
+    public UserEntity findByLoginAndPassword(String login, String password) {
+        UserEntity userEntity = userRepository.findByUsername(login);
+        if (userEntity != null) {
+            if (passwordEncoder.matches(password, userEntity.getPassword())) {
+                return userEntity;
+            }
+        }
+        return null;
+    }
 }
+
